@@ -1,11 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 
-from ..dependencies import get_token_header
 
 router = APIRouter(
     prefix="/items",
     tags=["items"],
-    dependencies=[Depends(get_token_header)],
+    dependencies=[],
     responses={404: {"description": "Not found"}},
 )
 
@@ -27,7 +26,6 @@ async def read_item(item_id: str):
 
 @router.put(
     "/{item_id}",
-    tags=["custom"],
     responses={403: {"description": "Operation forbidden"}},
 )
 async def update_item(item_id: str):

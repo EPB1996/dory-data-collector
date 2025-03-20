@@ -6,4 +6,6 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.115.11",
+    "google-cloud-firestore>=2.20.1",
+    "google-cloud-logging>=3.11.4",
 ]
