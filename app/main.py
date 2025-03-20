@@ -2,8 +2,8 @@ from fastapi import Depends, FastAPI
 
 from .dependencies import get_token_header
 
-from .routers import items
+from .routers import meeting
 
 app = FastAPI(dependencies=[])
 
-app.include_router(items.router)
+app.include_router(meeting.router)

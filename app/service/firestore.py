@@ -1,8 +1,15 @@
 import google.cloud.firestore as firestore
 
-from app.core.cloud_logging import Singleton
 from app.core.config import settings
 
+class Singleton(type):
+    _instances: dict = {}
+
+    def __call__(cls, *args, **kwargs) -> any:  # type: ignore
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+    
 
 class Firestore(metaclass=Singleton):
     def __init__(self) -> None:
@@ -63,3 +70,5 @@ class Firestore(metaclass=Singleton):
         element = doc.to_dict()
         element["id"] = doc.id
         return element
+
+

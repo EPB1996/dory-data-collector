@@ -8,4 +8,6 @@ dependencies = [
     "fastapi[standard]>=0.115.11",
     "google-cloud-firestore>=2.20.1",
     "google-cloud-logging>=3.11.4",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
 ]
