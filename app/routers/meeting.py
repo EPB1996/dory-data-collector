@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.models.base import Page
-from app.models.meeting import MeetingCreate, MeetingRead
+from app.models.meeting import Meeting, MeetingRead
 from app.service import firestore
 
 MEETING_COLLECTION = "dory-meeting"
@@ -33,8 +33,20 @@ async def read_item(meeting_id: str) -> MeetingRead:
     
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=MeetingRead)
-async def create_meeting(meeting: MeetingCreate) -> MeetingRead:
-    update_time, doc_ref = firestore.add_document(MEETING_COLLECTION, dict(meeting))
-    meeting = doc_ref.get().to_dict()
-    meeting["id"] = doc_ref.id
+async def create_meeting(meeting: Meeting) -> MeetingRead:
+    existing_meeting = firestore.get_document_by_field(MEETING_COLLECTION, "dory_id", meeting.dory_id)
+    existing_meeting_id = MeetingRead(**existing_meeting).id if existing_meeting else None
+
+    if not existing_meeting_id:
+        update_time, doc_ref = firestore.add_document(MEETING_COLLECTION, meeting.model_dump())
+        meeting = doc_ref.get().to_dict()
+        meeting["id"] = doc_ref.id
+    else:
+        firestore.update_document(MEETING_COLLECTION, existing_meeting_id, meeting.model_dump())
+        meeting = meeting.model_dump()
+        meeting["id"] = existing_meeting_id
+
     return meeting
+
+
+    
