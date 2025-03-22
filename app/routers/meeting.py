@@ -34,7 +34,7 @@ async def read_item(meeting_id: str) -> MeetingRead:
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=MeetingRead)
 async def create_meeting(meeting: Meeting) -> MeetingRead:
-    existing_meeting = firestore.get_document_by_field(MEETING_COLLECTION, "dory_id", meeting.dory_id)
+    existing_meeting = firestore.get_document_by_field(MEETING_COLLECTION, "randomIdentifier", meeting.randomIdentifier)
     existing_meeting_id = MeetingRead(**existing_meeting).id if existing_meeting else None
 
     if not existing_meeting_id:

@@ -1,3 +1,4 @@
+import datetime
 from typing import Optional
 from pydantic import BaseModel
 
@@ -7,9 +8,10 @@ class Task(BaseModel):
     description: str = None
     reference: str = None
     data: str = None
-    creationTime: int = None
+    creationTime: Optional[datetime.datetime] = None
     taskState: str = None
     extractionId: int = None
+    meetingId: int = None
 
 
 test:Task = {
