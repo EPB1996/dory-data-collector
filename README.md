@@ -48,6 +48,5 @@ gcloud projects add-iam-policy-binding sandbox-ebaumgartner \
 
 ```
 
-```sh
-gcloud run deploy dory-data-collector --port 8080 --source . --region europe-west9 --service-account dory-data-collector-sa@sandbox-ebaumgartner.iam.gserviceaccount.com --max-instances 1 --min-instances 0 --memory 256Mi --cpu 1
-```
+Deploy:
+See `./deploy.md`

@@ -13,7 +13,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.get(
+""" @router.get(
     "",
     response_model=Page[MeetingRead],
     status_code=status.HTTP_200_OK,
@@ -29,7 +29,7 @@ async def read_item(meeting_id: str) -> MeetingRead:
     meeting = firestore.get_document(MEETING_COLLECTION, meeting_id)
     if not meeting:
         raise HTTPException(status_code=404, detail="Meeting not found")
-    return meeting
+    return meeting """
     
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=MeetingRead)

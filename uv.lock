@@ -116,6 +116,7 @@ dependencies = [
     { name = "google-cloud-logging" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
+    { name = "python-dotenv" },
 ]
 
 [package.metadata]
@@ -125,6 +126,7 @@ requires-dist = [
     { name = "google-cloud-logging", specifier = ">=3.11.4" },
     { name = "pydantic", specifier = ">=2.10.6" },
     { name = "pydantic-settings", specifier = ">=2.8.1" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
 ]
 
 [[package]]
