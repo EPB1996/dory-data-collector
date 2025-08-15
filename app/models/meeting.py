@@ -15,11 +15,12 @@ class Meeting(BaseModel):
     creationTime: Optional[datetime.datetime] = None
     meetingState: Optional[str] = None
 
+    summary: Optional[str] = None
+
     extractions: Optional[list[Extraction]] = []
     tasks: Optional[list[Task]] = []
 
-    user: Optional[str] = None
-    
+    user: Optional[object] = None
 
 
 class MeetingRead(Meeting):
