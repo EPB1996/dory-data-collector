@@ -1,22 +1,27 @@
-
+import datetime
 from typing import Optional
-
 from pydantic import BaseModel
+from app.models.extraction import Extraction
+from app.models.task import Task
 
 
-class MeetingBase(BaseModel):
+class Meeting(BaseModel):
+    randomIdentifier: str
+
+    dory_id: str
     title: str
-    description: Optional[str] = None
-    metaData: Optional[str] = None
-    creationTime: Optional[int] = None
+    text: Optional[str] = None
+    metaData: Optional[dict] = None
+    creationTime: Optional[datetime.datetime] = None
     meetingState: Optional[str] = None
-    
 
-class MeetingRead(MeetingBase):
+    summary: Optional[str] = None
+
+    extractions: Optional[list[Extraction]] = []
+    tasks: Optional[list[Task]] = []
+
+    user: Optional[object] = None
+
+
+class MeetingRead(Meeting):
     id: str
-
-    class Config:
-        orm_mode = True
-
-class MeetingCreate(MeetingBase):
-    pass

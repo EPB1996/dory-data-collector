@@ -40,6 +40,15 @@ class Firestore(metaclass=Singleton):
 
         return Firestore._get_doc_as_dict(doc)
 
+    def get_document_by_field(
+        self, collection_name: str, field: str, value: str, as_dict=True
+    ) -> dict:
+        doc = self.client.collection(collection_name).where(field, "==", value).get()
+        if not doc:
+            return None
+        
+        return Firestore._get_doc_as_dict(doc[0])
+
     def add_document(self, collection_name: str, data: dict) -> firestore.DocumentReference:
         return self.client.collection(collection_name).add(data)
 
